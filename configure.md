@@ -115,7 +115,7 @@ printf 'Defaults!PFIFGW !log_allowed\n' | sudo tee -a /usr/local/etc/sudoers > /
 ```
 \* the second command didnt work for me but i was able to manually add it to the sudoers file
 
-Add the  [custom.conf](./config/custom.conf) telegraf config to /usr/local/etc/telegraf.d
+Add the custom.conf telegraf config to /usr/local/etc/telegraf.d
 
 ```
 sudo mkdir /usr/local/etc/telegraf.d
@@ -199,7 +199,7 @@ Now, add your index set from earlier to the "OPNsense / filterlog" stream. Navig
 
 ![Graylog Stream Index Set](https://www.bsmithio.com/post/opnsense-dashboard/streamindex.png)
 
-There's one more step we need to do here, navigate to System -> Configurations -> click on Update under Message Processors, and reorder like so:
+==There's one more step we need to do here==, navigate to System -> Configurations -> click on Update under Message Processors, and reorder like so:
 
 ![Graylog Message Processors](https://www.bsmithio.com/post/opnsense-dashboard/processors.png)
 
