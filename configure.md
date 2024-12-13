@@ -210,7 +210,8 @@ Ensure that all of these are enabled, and click save.
 Once that is all done, login to your OPNsense router and navigate to System -> Settings -> Logging / targets. Add a new target with the following options:
 
 ![OPNsense Syslog Target](https://i.nuuls.com/XQATf.png)
-==Make sure to check the 'rfc5424' box in OPNsense Logging / targets==
+
+\* Make sure to check the 'rfc5424' box in OPNsense Logging / targets==
 
 Add a description if you'd like, then click save.
 
