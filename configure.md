@@ -41,7 +41,7 @@ You will need to have Docker and Docker Compose installed on a server that will 
 
 After you've installed Docker and Docker Compose, download the docker-compose.yaml from this repo.
 
-`curl https://raw.githubusercontent.com/bsmithio/OPNsense-Dashboard/master/docker-compose.yaml -o docker-compose.yaml`
+`curl https://raw.githubusercontent.com/jtanamera/OPNsense-Dashboard/refs/heads/master/docker-compose.yaml -o docker-compose.yaml`
 
 It's important that you change the TZ environment variable to your timezone for everything to work properly.
 I also recommend you change the passwords in this compose file as well.
@@ -49,7 +49,7 @@ After you've made the necessary changes, run `docker-compose up -d` in the same 
 Once you have your docker containers running, follow the steps below.
 
 ## Configuring InfluxDB
-After InfluxDB is started, go to http://(ip of docker server):8086, you will need to setup your username, password, bucket and organization here. Once that is done navigate to the Data tab, click on Telegraf, and create a configuration for a system. Name it, and copy your API token, you will need this for your Telegraf configuration. You will also need to generate another API token for Grafana. Click on API tokens -> Generate API Token -> Read/Write Access -> Click on your bucket under Read -> and Save. Copy this somewhere as well, you'll need it for Grafana.
+After InfluxDB is started, go to http://(ip of docker server):8086, you will need to setup your username, password, bucket and organization here. Once that is done navigate to the Data tab, click on Telegraf, and create a configuration for a system. Name it, and copy your API token, you will need this for your Telegraf configuration. You will also need to generate another API token for Grafana. Click on API tokens -> Generate API Token -> Custom API Token -> Click on your bucket check the box for 'Read'access -> and Save. Copy this somewhere as well, you'll need it for Grafana.
 
 
 ## Configuring Telegraf
@@ -101,7 +101,7 @@ You can use Ansible to automate a few sections. Install [Ansible](https://docs.a
 
 ### Add telegraf to sudoers
 
-After that, we need to add telegraf to sudoers and use nopasswd to restrict telegraf to only what it needs to run as root.
+After that, we need to add telegraf to the OPNsense sudoers and use nopasswd to restrict telegraf to only what it needs to run as root.
 
 ```
 printf 'telegraf ALL=(root) NOPASSWD: /usr/local/bin/telegraf_pfifgw.php\n' | sudo tee -a /usr/local/etc/sudoers > /dev/null
@@ -113,6 +113,7 @@ You may also wish to disable sudo logging for telegraf_pfifgw.php, otherwise you
 printf 'Cmnd_Alias PFIFGW = /usr/local/bin/telegraf_pfifgw.php\n' | sudo tee -a /usr/local/etc/sudoers > /dev/null
 printf 'Defaults!PFIFGW !log_allowed\n' | sudo tee -a /usr/local/etc/sudoers > /dev/null
 ```
+\* the second command didnt work for me but i was able to manually add it the sudoers file
 
 Add the  [custom.conf](./config/custom.conf) telegraf config to /usr/local/etc/telegraf.d
 
@@ -133,6 +134,13 @@ Place [telegraf_pfifgw.php](https://raw.githubusercontent.com/bsmithio/OPNsense-
 curl "https://raw.githubusercontent.com/bsmithio/OPNsense-Dashboard/master/plugins/telegraf_pfifgw.php" -o /usr/local/bin/telegraf_pfifgw.php
 curl "https://raw.githubusercontent.com/bsmithio/OPNsense-Dashboard/master/plugins/telegraf_temperature.sh" -o /usr/local/bin/telegraf_temperature.sh
 chmod 755 /usr/local/bin/telegraf_temperature.sh /usr/local/bin/telegraf_pfifgw.php
+```
+
+\* When i ran the `sudo telegraf_pfifgw.php` script below on my FW i recieved the following error "Fatal error: Uncaught Error: Call to undefined function get_interfaces_info() in /usr/local/bin/telegraf_pfifgw.php:13". The issue was fixed with the following php file from @DannyJanmaat 
+
+```
+curl "https://raw.githubusercontent.com/jtanamera/OPNsense-Dashboard/refs/heads/master/plugins/telegraf_pfifgw.php" -o /usr/local/bin/telegraf_pfifgw.php
+chmod 755 /usr/local/bin/telegraf_pfifgw.php
 ```
 
 Test these out before starting the telegraf service by executing them
@@ -162,10 +170,20 @@ You'll need to download the GeoIP database file to your Graylog container. Acces
 Then download the database file, replace `YOUR_LICENSE_KEY` with the key you generated above.
 
 ```
-curl "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=YOUR_LICENSE_KEY&suffix=tar.gz" -o GeoLite2-Country.tar.gz \
+curl -flLs "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=<YOUR_LICENSE>>&suffix=tar.gz" -o GeoLite2-Country.tar.gz \
 && tar -xzvf GeoLite2-Country.tar.gz \
 && mv GeoLite2-Country_*/GeoLite2-Country.mmdb /usr/share/graylog/data/data/
+
+curl -flLs "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=<YOUR_LICENSE>&suffix=tar.gz" -o GeoLite2-City.tar.gz \
+&& tar -xzvf GeoLite2-City.tar.gz \
+&& mv GeoLite2-City_*/GeoLite2-City.mmdb /usr/share/graylog/data/data/
+
+curl -flLs "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=<YOUR_LICENSE>&suffix=tar.gz" -o GeoLite2-ASN.tar.gz \
+&& tar -xzvf GeoLite2-ASN.tar.gz \
+&& mv GeoLite2-ASN_*/GeoLite2-ASN.mmdb /usr/share/graylog/data/data/
 ```
+\* In my case i wasnt able to download the ASN file via curl, but i was able to download from the maxmind site and upload it to `/var/lib/docker/volumes/root_graylog_data`
+
 
 ### Configure Additional Settings
 
@@ -192,6 +210,7 @@ Ensure that all of these are enabled, and click save.
 Once that is all done, login to your OPNsense router and navigate to System -> Settings -> Logging / targets. Add a new target with the following options:
 
 ![OPNsense Syslog Target](https://i.nuuls.com/XQATf.png)
+==Make sure to check the 'rfc5424' box in OPNsense Logging / targets==
 
 Add a description if you'd like, then click save.
 
