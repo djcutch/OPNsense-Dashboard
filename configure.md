@@ -113,7 +113,7 @@ You may also wish to disable sudo logging for telegraf_pfifgw.php, otherwise you
 printf 'Cmnd_Alias PFIFGW = /usr/local/bin/telegraf_pfifgw.php\n' | sudo tee -a /usr/local/etc/sudoers > /dev/null
 printf 'Defaults!PFIFGW !log_allowed\n' | sudo tee -a /usr/local/etc/sudoers > /dev/null
 ```
-\* the second command didnt work for me but i was able to manually add it the sudoers file
+\* the second command didnt work for me but i was able to manually add it to the sudoers file
 
 Add the  [custom.conf](./config/custom.conf) telegraf config to /usr/local/etc/telegraf.d
 
