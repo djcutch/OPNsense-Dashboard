@@ -1,4 +1,4 @@
-version: '3'
+#version: '3'
 services:
   mongodb:
     container_name: mongo
@@ -13,7 +13,7 @@ services:
       - graylog  
   elasticsearch:
     container_name: elasticsearch
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.25
     volumes:
       - es_data:/usr/share/elasticsearch/data
     environment:
@@ -28,7 +28,7 @@ services:
       - graylog
   graylog:
     container_name: graylog
-    image: graylog/graylog:5.0.2
+    image: graylog/graylog:6.1.4
     volumes:
       - graylog_data:/usr/share/graylog/data
     environment:
