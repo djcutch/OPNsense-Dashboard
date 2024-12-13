@@ -37,7 +37,7 @@ Added RFC5424 support thanks to [subract](https://github.com/IRQ10/Graylog-OPNse
 
     Grafana 9.2.10
     InfluxDB 2.6.1
-    Graylog 5.0.2
+    Graylog 6.1.4
 
 
 # Configuration
