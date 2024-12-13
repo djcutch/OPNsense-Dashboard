@@ -49,7 +49,7 @@ After you've made the necessary changes, run `docker-compose up -d` in the same 
 Once you have your docker containers running, follow the steps below.
 
 ## Configuring InfluxDB
-After InfluxDB is started, go to http://(ip of docker server):8086, you will need to setup your username, password, bucket and organization here. Once that is done navigate to the Data tab, click on Telegraf, and create a configuration for a system. Name it, and copy your API token, you will need this for your Telegraf configuration. You will also need to generate another API token for Grafana. Click on API tokens -> Generate API Token -> Custom API Token -> Click on your bucket check the box for 'Read'access -> and Save. Copy this somewhere as well, you'll need it for Grafana.
+After InfluxDB is started, go to http://(ip of docker server):8086, you will need to setup your username, password, bucket (opnsense) and organization (opnsense) here. Navigate to the 'Load Data' tab, click on 'Telegraf', and create a configuration for a 'System'. Name it, and copy your API token, you will need this for your Telegraf configuration. You will also need to generate another API token for Grafana. Click on API tokens -> Generate API Token -> Custom API Token -> Click on your bucket check the box for 'Read'access -> and Save. Copy this somewhere as well, you'll need it for Grafana.
 
 
 ## Configuring Telegraf
