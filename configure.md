@@ -201,7 +201,7 @@ Now, add your index set from earlier to the "OPNsense / filterlog" stream. Navig
 
 ![Graylog Stream Index Set](https://www.bsmithio.com/post/opnsense-dashboard/streamindex.png)
 
-<mark>There's one more step we need to do here</mark>, navigate to System -> Configurations -> click on Update under Message Processors, and reorder like so:
+<mark>There's one more important step we need to do here</mark>, navigate to System -> Configurations -> click on Update under Message Processors, and reorder like so:
 
 ![Graylog Message Processors](https://www.bsmithio.com/post/opnsense-dashboard/processors.png)
 
@@ -213,7 +213,7 @@ Once that is all done, login to your OPNsense router and navigate to System -> S
 
 ![OPNsense Syslog Target](https://i.nuuls.com/XQATf.png)
 
-\* Make sure to check the 'rfc5424' box in OPNsense Logging / targets
+\* <mark>Make sure to check the 'rfc5424' box in OPNsense Logging / targets, otherwise the log data wont be formatted with the proper fields (i.e application_name, dst-ip, dst-port, etc) and the Firewall panels wont populate properly </mark>
 
 Add a description if you'd like, then click save. Make sure to also hit 'Apply'
 
@@ -229,11 +229,11 @@ Query Language: Flux
 
 URL: http://influxdb:8086
 
-Organization: Your InfluxDB Organization (opnsense)
+Organization: Your InfluxDB Organization (i.e opnsense)
 
 Token: Your Grafana InfluxDB API Token
 
-Default Bucket: Your opnsense bucket (opnsense). This will be the bucket that the panel queries will use.
+Default Bucket: Your opnsense bucket (i.e. opnsense). This will be the bucket that the panel queries will use.
 
 ![Grafana InfluxDB Configuration](https://www.bsmithio.com/post/opnsense-dashboard/influxdb.png)
 
@@ -249,7 +249,7 @@ Version: 7.10+
 
 ### Import Dashboard
 
-To import the dashboard, copy the JSON from [OPNsense-Grafana-Dashboard.json](https://raw.githubusercontent.com/bsmithio/OPNsense-Dashboard/master/OPNsense-Grafana-Dashboard.json) and navigate to Dashboards -> Browse -> Import and paste under Import via panel json.
+To import the dashboard, copy the JSON from [OPNsense-Grafana-Dashboard.json](https://raw.githubusercontent.com/bsmithio/OPNsense-Dashboard/master/OPNsense-Grafana-Dashboard.json) and navigate to Dashboards -> +Import, paste the code into the "Import via panel json" field, and click 'Load'at the bottom, Then click 'Import'.
 
 ### Configure Variables
 
@@ -269,6 +269,7 @@ Lastly, I don't recommend setting the time range beyond 24 hours, due to how man
 
 ## Configuration for the Suricata dashboard #Optional
 This section assumes you have already configured Suricata.
+\* Havent tried the Suricata dashboard yet
 
 ### Add the necessary files
 
