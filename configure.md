@@ -191,7 +191,7 @@ curl -flLs "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-
 
 In a browser navigate to http://(ip of docker server):9000 and login.
 
-For Graylog, it's recommended to create an index set. To do so, navigate to System -> Indices. Create an index set with the name "OPNsense / filterlog" and set the index prefix to `opnsense_filterlog`.
+For Graylog, it's recommended to create an index set. To do so, navigate to System -> Indices. Click 'Create an index Set' and configure it with the name "OPNsense / filterlog" and set the index prefix to `opnsense_filterlog`.
 
 ![Graylog Index Set](https://www.bsmithio.com/post/opnsense-dashboard/indexset.png)
 
@@ -201,7 +201,7 @@ Now, add your index set from earlier to the "OPNsense / filterlog" stream. Navig
 
 ![Graylog Stream Index Set](https://www.bsmithio.com/post/opnsense-dashboard/streamindex.png)
 
-==There's one more step we need to do here==, navigate to System -> Configurations -> click on Update under Message Processors, and reorder like so:
+<mark>There's one more step we need to do here</mark>, navigate to System -> Configurations -> click on Update under Message Processors, and reorder like so:
 
 ![Graylog Message Processors](https://www.bsmithio.com/post/opnsense-dashboard/processors.png)
 
