@@ -215,7 +215,7 @@ Once that is all done, login to your OPNsense router and navigate to System -> S
 
 \* Make sure to check the 'rfc5424' box in OPNsense Logging / targets
 
-Add a description if you'd like, then click save.
+Add a description if you'd like, then click save. Make sure to also hit 'Apply'
 
 ## Configuring Grafana
 
