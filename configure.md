@@ -88,9 +88,9 @@ Influx v2 Token: Your InfluxDB Token
 
 Influx v2 URL: Your InfluxDB URL, this will be the IP address or hostname of your system that is running InfluxDB. E.g http://192.168.1.10:8086
 
-Influx v2 Organization: Your InfluxDB Organization
+Influx v2 Organization: Your InfluxDB Organization (opnsense)
 
-Influx v2 Bucket: Your InfluxDB Bucket
+Influx v2 Bucket: Your InfluxDB Bucket (opnsense)
 
 ![](https://www.bsmithio.com/post/opnsense-dashboard/influxbucket.png)
 
