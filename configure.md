@@ -49,7 +49,9 @@ After you've made the necessary changes, run `docker-compose up -d` in the same 
 Once you have your docker containers running, follow the steps below.
 
 ## Configuring InfluxDB
-After InfluxDB is started, go to http://(ip of docker server):8086, you will need to setup your username, password, bucket (opnsense) and organization (opnsense) here. Navigate to the 'Load Data' tab, click on 'Telegraf', and create a configuration for a 'System'. Name it, and copy your API token, you will need this for your Telegraf configuration. You will also need to generate another API token for Grafana. Click on API tokens -> Generate API Token -> Custom API Token -> Click on your bucket check the box for 'Read'access -> and Save. Copy this somewhere as well, you'll need it for Grafana.
+After InfluxDB is started, go to http://(ip of docker server):8086, you will need to setup your username, password, bucket (opnsense) and organization (opnsense) here. Navigate to the 'Load Data' tab, click on 'Telegraf', and create a configuration for a 'System'. Name it, and copy your API token, you will need this for your Telegraf configuration. 
+
+You will also need to generate another API token for Grafana in this step [Add InfluxDB and ElasticSearch data sources](#add-influxdb-and-elasticsearch-data-sources). Click on API tokens -> Generate API Token -> Custom API Token -> Click on your bucket check the box for 'Read'access -> and Save. Copy this somewhere as well, you'll need it for Grafana.
 
 
 ## Configuring Telegraf
@@ -227,11 +229,11 @@ Query Language: Flux
 
 URL: http://influxdb:8086
 
-Organization: Your InfluxDB Organization
+Organization: Your InfluxDB Organization (opnsense)
 
 Token: Your Grafana InfluxDB API Token
 
-Default Bucket: Your opnsense bucket. This will be the bucket that the panel queries will use.
+Default Bucket: Your opnsense bucket (opnsense). This will be the bucket that the panel queries will use.
 
 ![Grafana InfluxDB Configuration](https://www.bsmithio.com/post/opnsense-dashboard/influxdb.png)
 
