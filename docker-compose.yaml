@@ -50,7 +50,7 @@ services:
       - elasticsearch
     ports:
       # Graylog web interface and REST API
-      - 9000:9001
+      - 9001:9000
       # Syslog UDP
       - 1514:1514/udp
       # Syslog TCP Optional
