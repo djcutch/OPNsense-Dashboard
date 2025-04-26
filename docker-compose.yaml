@@ -75,7 +75,7 @@ services:
     ports:
       - '3000:3000'
     volumes:
-      - grafana_data:/var/lib/grafana
+      - /mnt/cache/appdata/grafana_data:/var/lib/grafana
     depends_on:
       - influxdb
     environment:
@@ -92,7 +92,7 @@ networks:
   graylog:
     driver: bridge
 volumes:
-  grafana_data: /mnt/cache/appdata/grafana_data
+  grafana_data: 
   influxdb2_data:
   graylog_data:
   es_data:
