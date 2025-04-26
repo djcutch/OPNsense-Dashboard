@@ -92,8 +92,10 @@ networks:
   graylog:
     driver: bridge
 volumes:
-  grafana_data:
+  grafana_data: /mnt/cache/appdata/grafana_data
   influxdb2_data:
   graylog_data:
   es_data:
   mongodb_data:
+
+
