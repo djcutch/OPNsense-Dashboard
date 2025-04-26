@@ -4,7 +4,7 @@ services:
     container_name: mongo
     image: mongo:6.0.4
     volumes:
-      - mongodb_data:/data/db
+      - /mnt/cache/appdat/mongodb_data:/data/db
     restart: "unless-stopped"
     environment:
       # Change this to your time zone, valid time zones can be found here: https://www.joda.org/joda-time/timezones.html
@@ -15,7 +15,7 @@ services:
     container_name: elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch:7.17.25
     volumes:
-      - es_data:/usr/share/elasticsearch/data
+      - /mnt/cache/appdates/es_data:/usr/share/elasticsearch/data
     environment:
       # Change this to your time zone, valid time zones can be found here: https://www.joda.org/joda-time/timezones.html
       - TZ=CST6CDT
@@ -30,7 +30,7 @@ services:
     container_name: graylog
     image: graylog/graylog:6.1.4
     volumes:
-      - graylog_data:/usr/share/graylog/data
+      - /mnt/cache/appdat/graylog_data:/usr/share/graylog/data
     environment:
       # Change these to your time zone, valid time zones can be found here: https://www.joda.org/joda-time/timezones.html
       - TZ=CST6CDT
@@ -62,7 +62,7 @@ services:
     ports:
       - '8086:8086'
     volumes:
-      - influxdb2_data:/var/lib/influxdb2
+      - /mnt/cache/appdat/influxdb2_data:/var/lib/influxdb2
     environment:
       # Change this to your time zone, valid time zones can be found here: https://www.joda.org/joda-time/timezones.html
       - TZ=CST6CDT
@@ -75,7 +75,7 @@ services:
     ports:
       - '3000:3000'
     volumes:
-      - grafana_data:/var/lib/grafana
+      - /mnt/cache/appdat/grafana_data:/var/lib/grafana
     depends_on:
       - influxdb
     environment:
@@ -92,8 +92,8 @@ networks:
   graylog:
     driver: bridge
 volumes:
-  grafana_data:
-  influxdb2_data:
-  graylog_data:
-  es_data:
-  mongodb_data:
+  #grafana_data:
+  #influxdb2_data:
+  #graylog_data:
+  #es_data:
+  #mongodb_data:
