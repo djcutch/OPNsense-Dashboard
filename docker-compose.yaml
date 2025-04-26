@@ -8,7 +8,7 @@ services:
     restart: "unless-stopped"
     environment:
       # Change this to your time zone, valid time zones can be found here: https://www.joda.org/joda-time/timezones.html
-      - TZ=CST6CDT
+      - TZ=EST5EDT
     networks:
       - graylog  
   elasticsearch:
@@ -34,8 +34,8 @@ services:
     environment:
       # Change these to your time zone, valid time zones can be found here: https://www.joda.org/joda-time/timezones.html
       - TZ=CST6CDT
-      - ROOT_TIMEZONE=CST6CDT
-      - GRAYLOG_TIMEZONE=CST6CDT
+      - ROOT_TIMEZONE=EST5EDT
+      - GRAYLOG_TIMEZONE=EST5EDT
       # CHANGE ME (must be at least 16 characters)! This is not your password, this is meant for salting the password below.
       - GRAYLOG_PASSWORD_SECRET=ZDcwMzQ3NTE4ZTIwM
       # Username is "admin"
@@ -72,7 +72,7 @@ services:
     container_name: grafana
     image: grafana/grafana:9.2.10
     ports:
-      - '3000:3000'
+      - '3001:3001'
     volumes:
       - grafana_data:/var/lib/grafana
     depends_on:
