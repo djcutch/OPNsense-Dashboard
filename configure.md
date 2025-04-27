@@ -172,17 +172,9 @@ You'll need to download the GeoIP database file to your Graylog container. Acces
 Then download the database file, replace `YOUR_LICENSE_KEY` with the key you generated above.
 
 ```
-curl -flLs "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=<YOUR_LICENSE>>&suffix=tar.gz" -o GeoLite2-Country.tar.gz \
-&& tar -xzvf GeoLite2-Country.tar.gz \
-&& mv GeoLite2-Country_*/GeoLite2-Country.mmdb /usr/share/graylog/data/data/
-
-curl -flLs "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=<YOUR_LICENSE>&suffix=tar.gz" -o GeoLite2-City.tar.gz \
-&& tar -xzvf GeoLite2-City.tar.gz \
-&& mv GeoLite2-City_*/GeoLite2-City.mmdb /usr/share/graylog/data/data/
-
-curl -flLs "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=<YOUR_LICENSE>&suffix=tar.gz" -o GeoLite2-ASN.tar.gz \
-&& tar -xzvf GeoLite2-ASN.tar.gz \
-&& mv GeoLite2-ASN_*/GeoLite2-ASN.mmdb /usr/share/graylog/data/data/
+curl -J -L -u usekey "https://download.maxmind.com/geoip/databases/GeoLite2-Country/download?suffix=tar.gz" -o GeoLite2-Country.tar.gz | tar xvz -C /usr/share/graylog/data/data/
+curl -J -L -u usekey "https://download.maxmind.com/geoip/databases/GeoLite2-City/download?suffix=tar.gz" -o GeoLite2-City.tar.gz | tar xvz -C /usr/share/graylog/data/data/
+curl -J -L -u usekey "https://download.maxmind.com/geoip/databases/GeoLite2-ASN/download?suffix=tar.gz" -o GeoLite2-ASN.tar.gz | tar xvz -C /usr/share/graylog/data/data/
 ```
 \* In my case i wasnt able to download the ASN file via curl, but i was able to download from the maxmind site and upload it to `/var/lib/docker/volumes/root_graylog_data`
 
