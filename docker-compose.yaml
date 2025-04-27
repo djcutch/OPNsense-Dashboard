@@ -9,8 +9,7 @@ services:
     environment:
       # Change this to your time zone, valid time zones can be found here: https://www.joda.org/joda-time/timezones.html
       - TZ=EST5EDT
-      - PUID=99
-      - PGID=100
+      
     networks:
       - graylog  
   elasticsearch:
@@ -25,8 +24,7 @@ services:
       - transport.host=localhost
       - network.host=0.0.0.0
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - PUID=99
-      - PGID=100
+      
     restart: "unless-stopped"
     networks:
       - graylog
@@ -46,8 +44,7 @@ services:
       # Password is "admin", change this to your own hashed password. 'echo -n "password" | sha256sum' 
       - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
       - GRAYLOG_HTTP_EXTERNAL_URI=http://192.168.2.238:9001/
-      - PUID=99
-      - PGID=100
+     
     networks:
       - graylog
     depends_on:
@@ -71,8 +68,7 @@ services:
     environment:
       # Change this to your time zone, valid time zones can be found here: https://www.joda.org/joda-time/timezones.html
       - TZ=EST5EDT
-      - PUID=99
-      - PGID=100
+     
     restart: "unless-stopped"
     networks:
       - graylog
@@ -92,8 +88,7 @@ services:
       - GF_SECURITY_ADMIN_USER=opnsense
       - GF_SECURITY_ADMIN_PASSWORD=opnsense
       - GF_INSTALL_PLUGINS=grafana-worldmap-panel
-      - PUID=99
-      - PGID=100
+     
     restart: "unless-stopped"
     networks:
       - graylog
