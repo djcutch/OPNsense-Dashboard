@@ -1,4 +1,4 @@
-#version: '3'
+version: '3'
 services:
   mongodb:
     container_name: mongo
@@ -91,7 +91,7 @@ services:
 networks:
   graylog:
     driver: bridge
-volumes:
+#volumes:
   #grafana_data:
   #influxdb2_data:
   #graylog_data:
