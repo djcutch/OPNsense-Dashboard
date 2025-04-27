@@ -4,7 +4,7 @@ services:
     container_name: mongo
     image: mongo:6.0.4
     volumes:
-      - /mnt/cache/appdat/mongodb_data:/data/db
+      - /mnt/cache/appdata/mongodb_data:/data/db
     restart: "unless-stopped"
     environment:
       # Change this to your time zone, valid time zones can be found here: https://www.joda.org/joda-time/timezones.html
